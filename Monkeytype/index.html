@@ -1,0 +1,43 @@
+<title> Monkey type Clone </title>
+<style>
+    :root {
+        color-scheme:light dark;
+        --green: #00b755;
+        --yellow: #daaf38;
+        --red: #ca4754;
+        --black: #222;
+        --gray: #999; 
+    }
+
+    body {
+    /* Establece el color de fondo del cuerpo del documento usando una variable CSS llamada --black */
+    background-color: var(--black);
+    /* Define la fuente principal como Menlo, y si no está disponible, usa cualquier fuente monoespaciada */
+    font-family: Menlo, monospace;
+    /* Utiliza Grid Layout para el contenedor del cuerpo */
+    display: grid;
+    /* Centra el contenido del cuerpo tanto vertical como horizontalmente */
+    place-content: center;
+    /* Añade un relleno interno de 32 píxeles alrededor del contenido del cuerpo */
+    padding: 32px;
+}
+
+
+</style>
+
+   
+<body>
+    <main>
+        <section id="game" >
+            <time>30</time>
+            <p></p>
+            <input autofocus>
+        </section>
+    </main>
+</body>
+
+<script>
+    const $time = document.querySelector('time');
+    const $paragraph = document.querySelector('paragraph');
+    const $input = document.querySelector('input');
+</script>
