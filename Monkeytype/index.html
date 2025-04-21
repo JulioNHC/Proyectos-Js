@@ -10,17 +10,45 @@
     }
 
     body {
-    /* Establece el color de fondo del cuerpo del documento usando una variable CSS llamada --black */
-    background-color: var(--black);
-    /* Define la fuente principal como Menlo, y si no está disponible, usa cualquier fuente monoespaciada */
-    font-family: Menlo, monospace;
-    /* Utiliza Grid Layout para el contenedor del cuerpo */
-    display: grid;
-    /* Centra el contenido del cuerpo tanto vertical como horizontalmente */
-    place-content: center;
-    /* Añade un relleno interno de 32 píxeles alrededor del contenido del cuerpo */
-    padding: 32px;
-}
+        /* Establece el color de fondo del cuerpo del documento usando una variable CSS llamada --black */
+        background-color: var(--black);
+        /* Define la fuente principal como Menlo, y si no está disponible, usa cualquier fuente monoespaciada */
+        font-family: Menlo, monospace;
+        /* Utiliza Grid Layout para el contenedor del cuerpo */
+        display: grid;
+        /* Centra el contenido del cuerpo tanto vertical como horizontalmente */
+        place-content: center;
+        /* Añade un relleno interno de 32 píxeles alrededor del contenido del cuerpo */
+        padding: 32px;
+    }
+
+    section{
+        padding:16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        max-width: 500px;
+    }
+
+    time{
+        color:var(--yellow)
+    }
+
+    input{
+        z-index: -999;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        /* opacity: 0; */
+    }
+
+    p{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px 8px;
+        margin: 0;
+    }
 
 
 </style>
@@ -29,15 +57,68 @@
 <body>
     <main>
         <section id="game" >
-            <time>30</time>
+            <time></time>
             <p></p>
             <input autofocus>
         </section>
     </main>
 </body>
 
+
 <script>
     const $time = document.querySelector('time');
-    const $paragraph = document.querySelector('paragraph');
-    const $input = document.querySelector('input');///Comentario 222
+    const $paragraph = document.querySelector('p');
+    const $input = document.querySelector('input');
+
+    const INITIAL_TIME = 20;
+    const TEXT ="Cada noche, ella se sentaba en el mismo banco del parque con su libro. Él pasaba corriendo, fingiendo casualidad. Una noche, ella lo detuvo: —¿Vas a seguir corriendo o te vas a sentar conmigo alguna vez Desde entonces, las estrellas los ven juntos. El libro nunca se terminó."
+    
+    let words = []
+    let currentTime = INITIAL_TIME;
+
+    initGame()
+    initEvent()
+
+    function initGame() {
+        words = TEXT.split(' ').slice(0,32)
+        currentTime = INITIAL_TIME
+
+        $time.textContent = currentTime
+       
+        $paragraph.innerHTML = words.map((word, index) => {
+            const letters = word.split('')
+
+            return `<x-word>
+                ${letters
+                    .map(letter => `<x-letter>${letter}</x-letter>`)
+                    .join('')
+                }
+            </x-word>
+            `
+        }).join('')
+
+        const $firsWord = $paragraph.querySelector('x-word')
+        $firsWord.classList.add('active')
+        $firsWord.querySelector('x-letter').classList.add('active')
+
+        const intervalId = setInterval(() => {
+            currentTime--
+            $time.textContent = currentTime
+
+            if (currentTime == 0){
+                clearInterval(intervalId)
+                gameOver()
+            }
+        },1000)
+    }
+
+
+    function initEvent() {}
+
+    function gameOver(){
+        console.log('game over')
+    }
+
+
+
 </script>
