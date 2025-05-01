@@ -136,7 +136,28 @@
 
 
     function initEvent() {
+        document.addEventListener('keydown', () => {
+            $input.focus()
+        })
+        $input.addEventListener('keydown', onKeyDown)
+        $input.addEventListener('keyup', onkeyUp)
+    }
 
+    function onKeyDown(){
+        console.log("")
+    }
+
+    function onkeyUp(){
+        //recuperamos los elementos actuals
+        const $currentWord = $paragraph.querySelector('x-word.active')
+        const $currentLetter = $currentWord.querySelector('x-letter.active')
+
+        const currentWord = $currentWord.innerText.trim()
+        console.log({value: $input.value, currentWord})
+        
+        $input.value.split('').forEach((char, index) => {
+            const $letter = $allLetters
+        })
     }
 
     function gameOver(){
